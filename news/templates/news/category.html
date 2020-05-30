@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %} {{category.title}} :: {{ block.super }} {% endblock %}
+
+{% block sidebar %}
+{% include 'include/_sidebar.html'%}
+{% endblock %}
+
+
+{% block content %}
+{% for post in news %}
+
+<div class='card mt-3'>
+    <div class='card-header mb-3'>
+        Категория: {{ post.category }}
+    </div>
+    {% if post.is_published %}
+    <div class='card-body'>
+        <div class='media'>
+            {% if post.photo %}
+            <img src='{{ post.photo.url }}' alt='' width='350' class='mr-3'>
+            {% else %}
+            <p>No image</p>
+            {% endif %}
+
+            <div class='media-body'>
+                <h5 class='card-title {% cycle "text-danger" "text-success"  %}'>{{post.title}} </h5>
+                <p class='card-text'>{{post.content|truncatechars:150}}</p>
+                <a href='{{ post.get_absolute_url }}' class='btn btn-primary'>Переход </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class='card-footer text-muted'>
+        {{forloop.counter}} | {{ post.created_at|date:'Y-m-d H:i:s' }}
+    </div>
+</div>
+
+{%empty%}
+<p>Oops...</p>
+{% endfor %}
+{% endblock %}
+
