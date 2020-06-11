@@ -23,9 +23,10 @@ class News(models.Model):
 
 	def test_str(self):
 		return 'Hello World'
+
 	def get_absolute_url(self):
 		# reverse_lazy('название маршрута', kwards={для построения маршрута, нужен id})
-		return reverse_lazy('view_news', kwargs={'news_id': self.pk})
+		return reverse_lazy('view_news', kwargs={'pk': self.pk})
 
 	# Чтобы вернуть в виде строки заголовки статей,
 	# надо вернуть в __str__ по дефолту вернет Object Object

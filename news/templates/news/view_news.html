@@ -10,7 +10,7 @@
 
 <div class='card mt-3'>
     <div class='card-header mb-3'>
-        Категория: <a href='{% url "category" news_item.category.pk %}'>{{ news_item.category}}</a>
+        Категория: <a href='{{ news_item.category.get_absolute_url }}'>{{ news_item.category}}</a>
     </div>
     <div class='card-body'>
         {% if post.photo %}
